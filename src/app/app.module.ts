@@ -9,6 +9,7 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { MenuComponent } from './shared/components/menu/menu.component';
 import { InputFormGroupComponent } from './shared/components/input-form-group/input-form-group.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListCteComponent } from './list-cte/list-cte.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MensagemAlertaComponent,
     LoadingComponent,
     InputFormGroupComponent,
-    MenuComponent
+    MenuComponent,
+    ListCteComponent
   ],
   imports: [
     BrowserModule,
