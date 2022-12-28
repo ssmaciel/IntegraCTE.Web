@@ -1,0 +1,12 @@
+@import '../../../../variables.scss';
+
+.opcao-menu {
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.5s;
+}
+
+.opcao-menu:hover {
+    color: $fundo-padrao !important;
+    text-decoration: none;
+}

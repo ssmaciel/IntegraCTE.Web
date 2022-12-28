@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'variables.scss';
+
+header {
+    margin-bottom: 20px;
+}
+
+.botao-vermelho {
+    color: $letra-padrao;
+    background-color: $fundo-padrao;
+}
+
+.link-vermelho {
+    color: $fundo-padrao;
+    font-weight: 600;
+}
+
+.link-vermelho:hover {
+    color: $fundo-padrao;
+    text-decoration: underline;
+}
+.select-quota-button {
+    margin-right: 5px;
+    margin-top: 5px;
+    width: 65px;
+}

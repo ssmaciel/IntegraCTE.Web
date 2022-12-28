@@ -1,0 +1,7 @@
+<div class="form-group has-feedback" >
+    <label *ngIf="!!label">{{label}}</label>
+
+    <ng-content></ng-content>
+
+    <span class="help-message" *ngIf="hasError()">{{errorMessage}}</span>
+</div>

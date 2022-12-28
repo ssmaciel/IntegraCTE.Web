@@ -1,0 +1,9 @@
+<div *ngIf="apresentar">
+    <ng-content></ng-content>
+</div>
+
+<div class="help-progress" *ngIf="!apresentar">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 100%"></div>
+    </div>
+</div>

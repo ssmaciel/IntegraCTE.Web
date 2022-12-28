@@ -1,0 +1,6 @@
+<div class="alert" [class]="retornarSeEhSucesso() ? 'alert-success' : 'alert-danger'" *ngIf="alertaAtivo()">
+    {{retornarMensagemAlerta()}}
+    <button type="button" class="close" (click)="fecharAlerta()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
