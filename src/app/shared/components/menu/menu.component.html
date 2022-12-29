@@ -1,18 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="assets/img/logo-principal.png" alt="" width="130" height="40" class="logo-site d-inline-block align-text-top">
         </a>
-        <button *ngIf="!estaAutenticado()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <button *ngIf="estaAutenticado()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div *ngIf="!estaAutenticado()" class="collapse navbar-collapse" id="navbarText">
+        <div *ngIf="estaAutenticado()" class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link opcao-menu" (click)="abrirPaginaReservarCota()">Integração CTE</a>
                 </li>
             </ul>
-            <span *ngIf="!estaAutenticado()" class="navbar-text nav-item dropdown">
+            <span *ngIf="estaAutenticado()" class="navbar-text nav-item dropdown">
                 <a class="nav-link dropdown-toggle opcao-menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Samuel Silva Maciel
                 </a>
