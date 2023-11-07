@@ -10,6 +10,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
 import { InputFormGroupComponent } from './shared/components/input-form-group/input-form-group.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListCteComponent } from './list-cte/list-cte.component';
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ListCteComponent } from './list-cte/list-cte.component';
     LoadingComponent,
     InputFormGroupComponent,
     MenuComponent,
-    ListCteComponent
+    ListCteComponent,
+    UploadDialogComponent
   ],
   imports: [
     BrowserModule,
