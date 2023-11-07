@@ -11,7 +11,11 @@ import { InputFormGroupComponent } from './shared/components/input-form-group/in
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListCteComponent } from './list-cte/list-cte.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
+import { ApiService } from './shared/services/api.service';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
@@ -29,7 +33,7 @@ import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,16 @@
         Upload de XMLs
     </button>
 </div>
+
     <br/>
+    <div>
+        <li>
+            <ul *ngFor="let cte of this.ctes" >{{cte.cTe}}</ul>
+        </li>
+    </div>
+<br/>
+<br/>
+<br/>
     <app-upload-dialog></app-upload-dialog>
 
     <app-list-cte></app-list-cte>
