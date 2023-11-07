@@ -14,6 +14,7 @@ import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { ApiService } from './shared/services/api.service';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localePt, 'pt');
 
@@ -31,7 +32,8 @@ registerLocaleData(localePt, 'pt');
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
