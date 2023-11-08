@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    linkApi: 'https://localhost:54466/api/'
+    linkApi: 'https://localhost:53462/api/'
   };
   
   /*
