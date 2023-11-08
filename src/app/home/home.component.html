@@ -4,15 +4,7 @@
     </button>
 </div>
 
-    <br/>
-    <div>
-        <ul>
-            <li *ngFor="let cte of this.ctes" >{{cte.cTe}}</li>
-        </ul>
-    </div>
-<br/>
-<br/>
 <br/>
     <app-upload-dialog></app-upload-dialog>
 
-    <app-list-cte></app-list-cte>
+    <app-list-cte [ctes]="this.ctes"></app-list-cte>

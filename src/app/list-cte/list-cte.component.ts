@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CTEResponse } from '../shared/models/cte-response';
 
 @Component({
   selector: 'app-list-cte',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class ListCteComponent {
 
+  @Input() ctes: CTEResponse[] = []
+
+  ngInit(): void {
+    console.log(this.ctes)
+  }
 }

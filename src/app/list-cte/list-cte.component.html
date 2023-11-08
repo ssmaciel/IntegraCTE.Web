@@ -75,18 +75,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td> <input type="checkbox" name="" id="" class="form-check-input"/> </td>
-                <td>Braspress</td>
-                <td>1703</td>
-                <td>53701</td>
-                <td>1234568</td>
-                <td>19,90</td>
-                <td>27/12/2022</td>
-                <td>OC123456</td>
-                <td><span class="badge text-bg-success">Integrado</span></td>
+            <tr *ngFor="let cte of this.ctes">
+                <td> <input type="checkbox" name="" id="" class="form-check-input" value="{{cte.id}}"/> </td>
+                <td>{{cte.transportadora}}</td>
+                <td>{{cte.site}}</td>
+                <td>{{cte.nFe}}</td>
+                <td>{{cte.cTe}}</td>
+                <td>{{cte.valor}}</td>
+                <td>{{cte.dataImportacao}}</td>
+                <td>{{cte.ordemCompra}}</td>
+                <td [ngSwitch]="cte.status">
+                    <span *ngSwitchCase="'Integrado'" class="badge text-bg-success">{{cte.status}}</span>
+                    <span *ngSwitchCase="'Pendente'" title="Click para importar" class="badge text-bg-warning"><a href="#"style="color: black;">{{cte.status}} </a> </span> 
+                    <span *ngSwitchCase="'Erro'" title="Click para ver os erros" class="badge text-bg-danger"><a href="#" style="color: white;">{{cte.status}}</a> </span>
+                    <span *ngSwitchDefault class="badge text-bg-info">{{cte.status}}</span>
+                </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td> <input type="checkbox" name="" id="" class="form-check-input"/> </td>
                 <td>Braspress</td>
                 <td>1703</td>
@@ -107,7 +112,7 @@
                 <td>27/12/2022</td>
                 <td>OC123451</td>
                 <td><span class="badge text-bg-success">Integrado</span></td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 </div>
