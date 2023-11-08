@@ -1,4 +1,4 @@
-
+<app-cte-dialog [cteData]="cteData" [validacoes]="cteData.validacoes"></app-cte-dialog>
 <div class="">
     <table class="table table-responsive table-bordered">
         <thead>
@@ -81,10 +81,10 @@
                 <td>{{cte.site}}</td>
                 <td>{{cte.nFe}}</td>
                 <td>{{cte.cTe}}</td>
-                <td>{{cte.valor}}</td>
+                <td>{{cte.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
                 <td>{{cte.dataImportacao}}</td>
                 <td>{{cte.ordemCompra}}</td>
-                <td [ngSwitch]="cte.status">
+                <td [ngSwitch]="cte.status" (click)="openCteDialog(cte)"  data-bs-toggle="modal" data-bs-target="#cteModal">
                     <span *ngSwitchCase="'Integrado'" class="badge text-bg-success">{{cte.status}}</span>
                     <span *ngSwitchCase="'Pendente'" title="Click para importar" class="badge text-bg-warning"><a href="#"style="color: black;">{{cte.status}} </a> </span> 
                     <span *ngSwitchCase="'Erro'" title="Click para ver os erros" class="badge text-bg-danger"><a href="#" style="color: white;">{{cte.status}}</a> </span>

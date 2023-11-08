@@ -5,6 +5,6 @@
 </div>
 
 <br/>
-    <app-upload-dialog></app-upload-dialog>
+    <app-upload-dialog (informacaoEnviada)="receberInformacao($event)"></app-upload-dialog>
 
     <app-list-cte [ctes]="this.ctes"></app-list-cte>

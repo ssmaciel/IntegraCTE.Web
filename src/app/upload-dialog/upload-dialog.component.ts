@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { CTEInputRequest } from '../shared/models/cte-input-request';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -8,6 +9,9 @@ import { Component } from '@angular/core';
 export class UploadDialogComponent {
   selectedFiles: FileList | null = null;
   invoiceNumber: string = '';
+
+
+  @Output() informacaoEnviada = new EventEmitter<CTEInputRequest>();
 
   onFilesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -33,7 +37,7 @@ export class UploadDialogComponent {
         const reader = new FileReader();
         reader.onload = (e: ProgressEvent<FileReader>) => {
           // O resultado é um string em base64 que você pode enviar para a API
-          const base64 = e.target?.result as string;
+          const base64 = (e.target?.result as string).split(',')[1];
           this.uploadFileToApi(base64);
         };
         reader.readAsDataURL(file);
@@ -42,15 +46,11 @@ export class UploadDialogComponent {
   }
 
   uploadFileToApi(base64: string) {
-    // Aqui você implementaria o envio do arquivo em base64 para a sua API
-    console.log(base64);
-
-    // Exemplo de como você poderia chamar a API:
-    // this.http.post('sua-api/upload', { file: base64, invoiceNumber: this.invoiceNumber })
-    //   .subscribe(response => {
-    //     console.log('Upload bem-sucedido', response);
-    //   }, error => {
-    //     console.error('Erro no upload', error);
-    //   });
+    let input: CTEInputRequest = {
+      fatura: this.invoiceNumber,
+      xmlbase64: base64
+    };
+    
+    this.informacaoEnviada.emit(input);
   }
 }

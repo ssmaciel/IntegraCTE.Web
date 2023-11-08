@@ -9,8 +9,15 @@ import { CTEResponse } from '../shared/models/cte-response';
 export class ListCteComponent {
 
   @Input() ctes: CTEResponse[] = []
+  public cteData: CTEResponse = {}
 
   ngInit(): void {
     console.log(this.ctes)
   }
+  openCteDialog(cte: any) { // Substitua 'any' pelo tipo adequado
+    this.cteData = cte;
+    // Aqui você precisa abrir o modal. Se estiver usando Bootstrap, pode fazer assim:
+    
+  }
+
 }

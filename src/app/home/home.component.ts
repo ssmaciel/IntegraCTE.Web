@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from "src/app/shared/services/api.service";
 import { CTEResponse } from '../shared/models/cte-response';
+import { CTEInputRequest } from '../shared/models/cte-input-request';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,10 @@ export class HomeComponent {
 
   }
   ngOnInit(): void {
+    this.carregarCTEs();
+  }
+
+  carregarCTEs(): void {
     this.loading = true;
     this.service.retornarCTEs()
     .subscribe({
@@ -38,4 +43,23 @@ export class HomeComponent {
       }
     });
   }
+
+  receberInformacao(input: CTEInputRequest): void {
+    console.log(input)
+    this.service.enviarCTE(input)
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+        this.carregarCTEs();
+        // this.mensagemAlertaService.mostrarMensagemSucesso("Proposta Finalizada.");
+        // this.localStorage.removerItensUsuario();
+        // this.router.navigateByUrl('/');
+      },
+      error: (response) => {
+        console.log(response);
+        //this.mensagemAlertaService.mostrarMensagemAlerta('Erro ao finalizar proposta.');
+      }
+    });;
+  }
+
 }

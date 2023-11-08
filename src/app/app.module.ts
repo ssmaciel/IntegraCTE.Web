@@ -15,6 +15,7 @@ import { ApiService } from './shared/services/api.service';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { HttpClientModule } from '@angular/common/http';
+import { CteDialogComponent } from './cte-dialog/cte-dialog.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -27,7 +28,8 @@ registerLocaleData(localePt, 'pt');
     InputFormGroupComponent,
     MenuComponent,
     ListCteComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+    CteDialogComponent
   ],
   imports: [
     BrowserModule,
