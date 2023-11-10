@@ -5,7 +5,8 @@
             <tr>
                 <th> 
                     <div class="row">
-                        <div class="col"> <input type="checkbox" name="" id="" class="form-check-input"/> </div>
+                        <div class="col"> <input type="checkbox" name="" id="cb-todos" class="form-check-input"
+                            [(ngModel)]="selectAll" (change)="toggleAllSelection()"/> </div>
                     </div>
                 </th>
                 <th>
@@ -76,13 +77,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let cte of this.ctes">
-                <td> <input type="checkbox" name="" id="" class="form-check-input" value="{{cte.id}}"/> </td>
+                <td> <input type="checkbox" name="{{cte.id}}" id="{{cte.id}}" class="form-check-input" [(ngModel)]="cte.selected" (change)="checkIfAllSelected()" /> </td>
                 <td>{{cte.transportadora}}</td>
                 <td>{{cte.site}}</td>
                 <td>{{cte.nFe}}</td>
                 <td>{{cte.cTe}}</td>
                 <td>{{cte.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
-                <td>{{cte.dataImportacao}}</td>
+                <td>{{cte.dataImportacao | date: 'dd/MM/yyyy'}}</td>
                 <td>{{cte.ordemCompra}}</td>
                 <td [ngSwitch]="cte.status" (click)="openCteDialog(cte)"  data-bs-toggle="modal" data-bs-target="#cteModal">
                     <span *ngSwitchCase="'Integrado'" class="badge text-bg-success">{{cte.status}}</span>

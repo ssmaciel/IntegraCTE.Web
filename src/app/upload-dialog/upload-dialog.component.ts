@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CTEInputRequest } from '../shared/models/cte-input-request';
+import { ArquivoInputRequest } from '../shared/models/arquivo-input-request';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -11,7 +11,7 @@ export class UploadDialogComponent {
   invoiceNumber: string = '';
 
 
-  @Output() informacaoEnviada = new EventEmitter<CTEInputRequest>();
+  @Output() informacaoEnviada = new EventEmitter<ArquivoInputRequest>();
 
   onFilesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -46,7 +46,7 @@ export class UploadDialogComponent {
   }
 
   uploadFileToApi(base64: string) {
-    let input: CTEInputRequest = {
+    let input: ArquivoInputRequest = {
       fatura: this.invoiceNumber,
       xmlbase64: base64
     };

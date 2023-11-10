@@ -11,6 +11,7 @@ export interface CTEResponse {
     ordemCompra?:    null | string;
     status?:         string;
     validacoes?:     ValidacoeResponse[];
+    selected?:        boolean;
 }
 
 export interface ValidacoeResponse {
