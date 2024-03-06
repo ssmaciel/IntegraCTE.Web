@@ -1,5 +1,5 @@
 <app-cte-dialog [cteData]="cteData" [validacoes]="cteData.validacoes"></app-cte-dialog>
-<div class="">
+<div class="container">
     <table class="table table-responsive table-bordered">
         <thead>
             <tr>
@@ -14,7 +14,7 @@
                         <div class="col">Transportadora</div>
                     </div>
                     <div class="row">
-                        <div class="col"><input type="search" name="" id="" class="form-control"/></div>
+                        <div class="col"><input type="search" name="transportadora" id="transportadora" class="form-control"/></div>
                     </div>
                 </th>
                 <th>
@@ -116,4 +116,31 @@
             </tr> -->
         </tbody>
     </table>
+    
+      
+    <nav aria-label="Page navigation" *ngIf="retornarTotalPaginas() > 1">
+        <ul class="pagination justify-content-end">
+          <li class="page-item" [ngClass]="{'disabled': estaNaPrimeiraPagina() }">
+            <a class="page-link" [ngClass]="{'pagination-button': !estaNaPrimeiraPagina() }" href="#" (click)="alterarPaginacao(1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngIf="ultrapassouLimitePagina() && !estaNoInicio()">
+            <a class="page-link pagination-button" href="#" (click)="descerPaginaLimite()">...</a>
+          </li>
+          <li *ngFor="let pagina of retornarPaginas()" class="page-item" [ngClass]="{'disabled': pagina === paginaAtual() }">
+            <a class="page-link" [ngClass]="{'pagination-button': pagina !== paginaAtual() }" href="#" (click)="alterarPaginacao(pagina)">{{pagina}}</a>
+          </li>
+          <li class="page-item" *ngIf="ultrapassouLimitePagina() && !estaNoFim()">
+            <a class="page-link pagination-button" href="#" (click)="subirPaginaLimite()">...</a>
+          </li>
+          <li class="page-item" [ngClass]="{'disabled': estaNaUltimaPagina() }">
+            <a class="page-link" [ngClass]="{'pagination-button': !estaNaUltimaPagina() }" href="#"(click)="alterarPaginacao(retornarTotalPaginas())" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 </div>

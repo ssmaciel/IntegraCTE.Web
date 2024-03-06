@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from "src/app/shared/services/api.service";
-import { CTEResponse } from '../shared/models/cte-response';
+import { CTEResponse, ListCTEResponse } from '../shared/models/cte-response';
 import { ArquivoInputRequest } from '../shared/models/arquivo-input-request';
 
 @Component({
@@ -18,29 +18,35 @@ export class HomeComponent {
   public qtdeCtesIntegrar: number = 0;
   public qtdeCtesIntegrado: number = 0;
 
+  public listCtes?: ListCTEResponse 
   public ctes: CTEResponse[] = []
-
+  public totalItens = 0;
+  public itensPorPagina: number = 20;
+  
   constructor(private service: ApiService){
 
   }
   ngOnInit(): void {
-    this.carregarCTEs();
+    this.carregarCTEs(1);
   }
 
   ctesSelecionados(): boolean {
     return this.ctes.some(cte => cte.selected)
   }
 
-  carregarCTEs(): void {
+  carregarCTEs(pagina: number): void {
     this.loading = true;
-    this.service.retornarCTEs()
+    this.service.retornarCTEs(pagina, this.itensPorPagina)
     .subscribe({
       next: (response) => {
         this.loading = false;
-        if(response.length == 0) {
+        if(response.itens.length == 0) {
           //this.mensagemAlertaService.mostrarMensagemAlerta('CTEs não encontrado');
+          alert('CTEs não encontrado')
         } else {
-          this.ctes = response;
+          this.listCtes = response;//.filter(f => f.status == "Pendente");
+          this.totalItens = this.listCtes.total
+          this.ctes = this.listCtes.itens
         }
       },
       error: (response) => {
@@ -52,6 +58,10 @@ export class HomeComponent {
         //this.mensagemAlertaService.mostrarMensagemAlerta('Erro ao retornar tipo pessoa!');
       }
     });
+  }
+
+  atualizarListaCTEs(pagina: number){
+    this.carregarCTEs(pagina);
   }
 
   atuailzarCtes(ctesAtualizados: CTEResponse[]): void{
@@ -68,7 +78,7 @@ export class HomeComponent {
         ++this.qtdeCtesProcessados
         ++this.qtdeCtesProcessadosSucesso
         if (this.qtdeCtes == this.qtdeCtesProcessados) {
-          this.carregarCTEs();
+          this.carregarCTEs(1);
         }
         // this.mensagemAlertaService.mostrarMensagemSucesso("Proposta Finalizada.");
         // this.localStorage.removerItensUsuario();
@@ -79,7 +89,7 @@ export class HomeComponent {
         ++this.qtdeCtesProcessados
         ++this.qtdeCtesProcessadosComErro
         if (this.qtdeCtes == this.qtdeCtesProcessados) {
-          this.carregarCTEs();
+          this.carregarCTEs(1);
         }
         //this.mensagemAlertaService.mostrarMensagemAlerta('Erro ao finalizar proposta.');
       }
@@ -94,7 +104,7 @@ export class HomeComponent {
         next: (response) => {
           ++this.qtdeCtesIntegrado
           if (this.qtdeCtesIntegrar == this.qtdeCtesIntegrado) {
-            this.carregarCTEs();
+            this.carregarCTEs(1);
             this.qtdeCtesIntegrar = 0
             this.qtdeCtesIntegrado = 0
           }
@@ -102,7 +112,7 @@ export class HomeComponent {
         error: (response) => {
           ++this.qtdeCtesIntegrado
           if (this.qtdeCtesIntegrar == this.qtdeCtesIntegrado) {
-            this.carregarCTEs();
+            this.carregarCTEs(1);
             this.qtdeCtesIntegrar = 0
             this.qtdeCtesIntegrado = 0
           }

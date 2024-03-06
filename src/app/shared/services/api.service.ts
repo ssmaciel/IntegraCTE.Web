@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CTEResponse } from '../models/cte-response';
+import { CTEResponse, ListCTEResponse } from '../models/cte-response';
 import { ArquivoInputRequest } from '../models/arquivo-input-request';
 import { CTEInputRequest } from '../models/cte-input-request';
 
@@ -14,8 +14,12 @@ export class ApiService {
   private urlBase = `${environment.linkApi}cte/ultimos`
   constructor(private readonly http: HttpClient) { }
 
-  public retornarCTEs(): Observable<CTEResponse[]> {
-    return this.http.get<CTEResponse[]>(`${this.urlBase}`)
+  public retornarCTEs(pagina: number, tamanhoPagina: number): Observable<ListCTEResponse> {
+    return this.http.get<ListCTEResponse>(`${this.urlBase}?pagina=${pagina}&tamanhoPagina=${tamanhoPagina}`, {
+      headers: {
+        ["Cache-Control"]:"public,max-age=1"
+      }
+    })
     .pipe(
       catchError((err) => {
         return throwError(err);
