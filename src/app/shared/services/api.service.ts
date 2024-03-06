@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CTEResponse, ListCTEResponse } from '../models/cte-response';
+
 import { ArquivoInputRequest } from '../models/arquivo-input-request';
 import { CTEInputRequest } from '../models/cte-input-request';
 
@@ -20,6 +21,7 @@ export class ApiService {
         ["Cache-Control"]:"public,max-age=1"
       }
     })
+
     .pipe(
       catchError((err) => {
         return throwError(err);
