@@ -18,3 +18,9 @@ export interface ValidacoeResponse {
     mensagem:     string;
     tipoMensagem: string;
 }
+
+export interface ListCTEResponse {
+    itens:     CTEResponse[];
+    total: number;
+    pagina: number;
+}

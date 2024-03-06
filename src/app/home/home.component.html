@@ -12,4 +12,5 @@
 <br/>
     <app-upload-dialog (informacaoEnviada)="receberInformacao($event)"></app-upload-dialog>
 
-    <app-list-cte [ctes]="this.ctes" (ctesAtualizados)="atuailzarCtes($event)"></app-list-cte>
+    <app-list-cte [ctes]="this.ctes" [totalItens]="this.totalItens" [itensPorPagina]="this.itensPorPagina" (ctesAtualizados)="atuailzarCtes($event)" (atualizarListaCTEs)="atualizarListaCTEs($event)"></app-list-cte>
+
