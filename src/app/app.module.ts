@@ -10,7 +10,14 @@ import { MenuComponent } from './shared/components/menu/menu.component';
 import { InputFormGroupComponent } from './shared/components/input-form-group/input-form-group.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListCteComponent } from './list-cte/list-cte.component';
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
+import { ApiService } from './shared/services/api.service';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { HttpClientModule } from '@angular/common/http';
+import { CteDialogComponent } from './cte-dialog/cte-dialog.component';
 
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
@@ -20,14 +27,17 @@ import { ListCteComponent } from './list-cte/list-cte.component';
     LoadingComponent,
     InputFormGroupComponent,
     MenuComponent,
-    ListCteComponent
+    ListCteComponent,
+    UploadDialogComponent,
+    CteDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

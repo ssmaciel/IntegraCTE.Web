@@ -1,2 +1,15 @@
-<p>home works!</p>
-<app-list-cte></app-list-cte>
+<div class="container">
+
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-success me-2" *ngIf="ctesSelecionados()" (click)="integrarCte()">
+            Integrar CT-e(s)
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal" >
+            Upload de XMLs
+        </button>
+    </div>
+</div>
+<br/>
+    <app-upload-dialog (informacaoEnviada)="receberInformacao($event)"></app-upload-dialog>
+
+    <app-list-cte [ctes]="this.ctes" (ctesAtualizados)="atuailzarCtes($event)"></app-list-cte>

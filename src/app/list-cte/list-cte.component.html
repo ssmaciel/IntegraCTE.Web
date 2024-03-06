@@ -1,10 +1,12 @@
+<app-cte-dialog [cteData]="cteData" [validacoes]="cteData.validacoes"></app-cte-dialog>
 <div class="">
     <table class="table table-responsive table-bordered">
         <thead>
             <tr>
                 <th> 
                     <div class="row">
-                        <div class="col"> <input type="checkbox" name="" id="" class="form-check-input"/> </div>
+                        <div class="col"> <input type="checkbox" name="" id="cb-todos" class="form-check-input"
+                            [(ngModel)]="selectAll" (change)="toggleAllSelection()"/> </div>
                     </div>
                 </th>
                 <th>
@@ -74,18 +76,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td> <input type="checkbox" name="" id="" class="form-check-input"/> </td>
-                <td>Braspress</td>
-                <td>1703</td>
-                <td>53701</td>
-                <td>1234568</td>
-                <td>19,90</td>
-                <td>27/12/2022</td>
-                <td>OC123456</td>
-                <td><span class="badge text-bg-success">Integrado</span></td>
+            <tr *ngFor="let cte of this.ctes">
+                <td> <input type="checkbox" name="{{cte.id}}" id="{{cte.id}}" class="form-check-input" [(ngModel)]="cte.selected" (change)="checkIfAllSelected()" /> </td>
+                <td>{{cte.transportadora}}</td>
+                <td>{{cte.site}}</td>
+                <td>{{cte.nFe}}</td>
+                <td>{{cte.cTe}}</td>
+                <td>{{cte.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+                <td>{{cte.dataImportacao | date: 'dd/MM/yyyy'}}</td>
+                <td>{{cte.ordemCompra}}</td>
+                <td [ngSwitch]="cte.status" (click)="openCteDialog(cte)"  data-bs-toggle="modal" data-bs-target="#cteModal">
+                    <span *ngSwitchCase="'Integrado'" class="badge text-bg-success">{{cte.status}}</span>
+                    <span *ngSwitchCase="'Pendente'" title="Click para importar" class="badge text-bg-warning"><a href="#"style="color: black;">{{cte.status}} </a> </span> 
+                    <span *ngSwitchCase="'Erro'" title="Click para ver os erros" class="badge text-bg-danger"><a href="#" style="color: white;">{{cte.status}}</a> </span>
+                    <span *ngSwitchDefault class="badge text-bg-info">{{cte.status}}</span>
+                </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td> <input type="checkbox" name="" id="" class="form-check-input"/> </td>
                 <td>Braspress</td>
                 <td>1703</td>
@@ -106,7 +113,7 @@
                 <td>27/12/2022</td>
                 <td>OC123451</td>
                 <td><span class="badge text-bg-success">Integrado</span></td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 </div>
