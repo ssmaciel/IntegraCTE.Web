@@ -15,8 +15,9 @@ export class ApiService {
   private urlBase = `${environment.linkApi}cte/ultimos`
   constructor(private readonly http: HttpClient) { }
 
-  public retornarCTEs(pagina: number, tamanhoPagina: number): Observable<ListCTEResponse> {
-    return this.http.get<ListCTEResponse>(`${this.urlBase}?pagina=${pagina}&tamanhoPagina=${tamanhoPagina}`, {
+  public retornarCTEs(pagina: number, tamanhoPagina: number, status?: string): Observable<ListCTEResponse> {
+    let statusQuery = status != null && status !== null && status !== "" && status !== undefined ? `&status=${status}` : "";
+    return this.http.get<ListCTEResponse>(`${this.urlBase}?pagina=${pagina}&tamanhoPagina=${tamanhoPagina}${statusQuery}`, {
       headers: {
         ["Cache-Control"]:"public,max-age=1"
       }
@@ -31,6 +32,15 @@ export class ApiService {
 
   public enviarCTE(input: ArquivoInputRequest): Observable<CTEResponse[]> {
     return this.http.post<any>(`${environment.linkApi}xml/upload`, input)
+    .pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
+  }
+
+  public enviarCTEZIP(input: FormData): Observable<CTEResponse[]> {
+    return this.http.post<any>(`${environment.linkApi}xml/upload/zip`, input)
     .pipe(
       catchError((err) => {
         return throwError(err);

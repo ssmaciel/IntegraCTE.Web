@@ -1,0 +1,22 @@
+<div class="modal fade" id="uploadZipModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">Upload ZIP</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="file" id="xmlFiles" (change)="onFilesSelected($event)" accept=".zip,.rar" class="form-control mb-3" />
+          <div class="mb-3">
+            <label for="invoiceNumber" class="form-label">Número da Fatura</label>
+            <input type="text" class="form-control" id="invoiceNumber" [(ngModel)]="invoiceNumber">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="uploadFiles()">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

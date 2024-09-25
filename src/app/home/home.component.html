@@ -4,6 +4,9 @@
         <button type="button" class="btn btn-success me-2" *ngIf="ctesSelecionados()" (click)="integrarCte()">
             Integrar CT-e(s)
         </button>
+        <button type="button" class="btn btn-primary  me-2" data-bs-toggle="modal" data-bs-target="#uploadZipModal" >
+            Upload ZIP
+        </button>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal" >
             Upload de XMLs
         </button>
@@ -11,6 +14,7 @@
 </div>
 <br/>
     <app-upload-dialog (informacaoEnviada)="receberInformacao($event)"></app-upload-dialog>
+    <app-upload-zip-dialog (informacaoEnviada)="receberZip($event)"></app-upload-zip-dialog>
 
-    <app-list-cte [ctes]="this.ctes" [totalItens]="this.totalItens" [itensPorPagina]="this.itensPorPagina" (ctesAtualizados)="atuailzarCtes($event)" (atualizarListaCTEs)="atualizarListaCTEs($event)"></app-list-cte>
+    <app-list-cte [ctes]="this.ctes" [totalItens]="this.totalItens" [itensPorPagina]="this.itensPorPagina" (ctesAtualizados)="atuailzarCtes($event)" (atualizarListaCTEs)="atualizarListaCTEs($event)" (atualizarListaCTEsStatus)="atualizarListaCTEsStatus($event)"></app-list-cte>
 

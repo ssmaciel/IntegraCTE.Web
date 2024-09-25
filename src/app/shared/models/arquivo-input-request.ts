@@ -3,4 +3,5 @@
 export interface ArquivoInputRequest {
     fatura:    string;
     xmlbase64: string;
+    file: File | null;
 }

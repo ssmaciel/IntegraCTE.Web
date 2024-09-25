@@ -16,6 +16,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { HttpClientModule } from '@angular/common/http';
 import { CteDialogComponent } from './cte-dialog/cte-dialog.component';
+import { UploadZipDialogComponent } from './upload-zip-dialog/upload-zip-dialog.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -29,7 +30,8 @@ registerLocaleData(localePt, 'pt');
     MenuComponent,
     ListCteComponent,
     UploadDialogComponent,
-    CteDialogComponent
+    CteDialogComponent,
+    UploadZipDialogComponent
   ],
   imports: [
     BrowserModule,

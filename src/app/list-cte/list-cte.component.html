@@ -70,7 +70,7 @@
                         <div class="col">Status</div>
                     </div>
                     <div class="row">
-                        <div class="col"><input type="search" name="" id="" class="form-control"/></div>
+                        <div class="col"><input type="search" name="" id="" class="form-control" [(ngModel)]="status" (focus)="onFoco()" (blur)="onPerdeuFoco()"/></div>
                     </div>
                 </th>
             </tr>

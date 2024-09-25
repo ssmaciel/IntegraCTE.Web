@@ -48,7 +48,8 @@ export class UploadDialogComponent {
   uploadFileToApi(base64: string) {
     let input: ArquivoInputRequest = {
       fatura: this.invoiceNumber,
-      xmlbase64: base64
+      xmlbase64: base64,
+      file: null
     };
     
     this.informacaoEnviada.emit(input);

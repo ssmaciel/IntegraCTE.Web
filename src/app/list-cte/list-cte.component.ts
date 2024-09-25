@@ -14,9 +14,12 @@ export class ListCteComponent {
   @Input() itensPorPagina: number = 20
   @Output() ctesAtualizados = new EventEmitter<CTEResponse[]>()
   @Output() atualizarListaCTEs = new EventEmitter<number>()
+  @Output() atualizarListaCTEsStatus = new EventEmitter<string>()
   public cteData: CTEResponse = {}
 
   selectAll: boolean = false;
+  status: string = "Pendente";
+  statusAntigo: string = "Pendente";
 
   //#region Props Paginação
   private pagina = 1;
@@ -27,7 +30,17 @@ export class ListCteComponent {
   private atualUltimaPaginaLimite = this.limitePagina;
   private readonly qtdDiasUltimasVendas = 7; 
   //#endregion
+  onFoco() {
+    this.statusAntigo = this.status;
+  }
 
+  // Compara o valor atual com o valor original após o campo perder o foco
+  onPerdeuFoco() {
+    if (this.status !== this.statusAntigo) {
+      console.log("O valor mudou de:", this.statusAntigo, "para:", this.status);
+      this.atualizarListaCTEsStatus.emit(this.status)
+    }
+  }
   toggleAllSelection() {
     if (this.ctes == null  || this.ctes?.length <= 0) {
       return;

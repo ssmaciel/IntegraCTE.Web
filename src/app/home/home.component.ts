@@ -21,22 +21,23 @@ export class HomeComponent {
   public listCtes?: ListCTEResponse 
   public ctes: CTEResponse[] = []
   public totalItens = 0;
+  public pagina = 1;
   public itensPorPagina: number = 20;
   
   constructor(private service: ApiService){
 
   }
   ngOnInit(): void {
-    this.carregarCTEs(1);
+    this.carregarCTEs(1, "Pendente");
   }
 
   ctesSelecionados(): boolean {
     return this.ctes.some(cte => cte.selected)
   }
 
-  carregarCTEs(pagina: number): void {
+  carregarCTEs(pagina: number, status?: string): void {
     this.loading = true;
-    this.service.retornarCTEs(pagina, this.itensPorPagina)
+    this.service.retornarCTEs(pagina, this.itensPorPagina, status)
     .subscribe({
       next: (response) => {
         this.loading = false;
@@ -61,11 +62,56 @@ export class HomeComponent {
   }
 
   atualizarListaCTEs(pagina: number){
-    this.carregarCTEs(pagina);
+    this.pagina = pagina
+    this.carregarCTEs(this.pagina);
+  }
+
+  atualizarListaCTEsStatus(status: string){
+    this.carregarCTEs(this.pagina, status);
   }
 
   atuailzarCtes(ctesAtualizados: CTEResponse[]): void{
     this.ctes = ctesAtualizados;
+  }
+
+  receberZip(input: ArquivoInputRequest){
+    
+    if(input.file === null) {
+      // this.mensagemAlertaService.mostrarMensagemAlerta("Arquivo não selecionado!");  
+      return;
+    }
+    
+    const formData = new FormData();
+
+    let blob :Blob  = input.file;
+    formData.append('file', blob, input.file?.name);
+    formData.append('fatura', input.fatura);
+    this.service.enviarCTEZIP(formData)
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+        alert(`Sucesso: ${response}`)
+        ++this.qtdeCtesProcessados
+        ++this.qtdeCtesProcessadosSucesso
+        if (this.qtdeCtes == this.qtdeCtesProcessados) {
+          this.carregarCTEs(1);
+        }
+        // this.mensagemAlertaService.mostrarMensagemSucesso("Proposta Finalizada.");
+        // this.localStorage.removerItensUsuario();
+        // this.router.navigateByUrl('/');
+      },
+      error: (response) => {
+        console.log(response);
+        alert(`Erro: ${response}`)
+        alert(response)
+        ++this.qtdeCtesProcessados
+        ++this.qtdeCtesProcessadosComErro
+        if (this.qtdeCtes == this.qtdeCtesProcessados) {
+          this.carregarCTEs(1);
+        }
+        //this.mensagemAlertaService.mostrarMensagemAlerta('Erro ao finalizar proposta.');
+      }
+    });;
   }
 
   receberInformacao(input: ArquivoInputRequest): void {
